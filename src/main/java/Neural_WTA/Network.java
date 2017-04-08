@@ -1,5 +1,6 @@
 package Neural_WTA;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,7 +8,7 @@ import java.util.Random;
 /**
  * Created by Jakub on 2017-03-15.
  */
-public class Network {
+public class Network implements Serializable{
     private List<Neuron> neurons;
     private List<Float> inputs;
 

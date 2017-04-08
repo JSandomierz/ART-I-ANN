@@ -1,9 +1,11 @@
 package Neural_WTA;
 
+import java.io.Serializable;
+
 /**
  * Created by Jakub on 2017-03-15.
  */
-public class NeuronConnection {
+public class NeuronConnection implements Serializable{
     private float input;
     private float weight;
 

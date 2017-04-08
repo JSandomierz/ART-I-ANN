@@ -1,12 +1,13 @@
 package Neural_WTA;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Jakub on 2017-03-15.
  */
-public class Neuron {
+public class Neuron implements Serializable{
     public final int id;
     private List<NeuronConnection> connections;
     private float output;
