@@ -1,4 +1,4 @@
-package Neural_WTA;
+package Neural_ART_I;
 
 /**
  * Created by Jakub on 2017-03-15.

@@ -1,4 +1,4 @@
-package Neural_WTA;
+package Neural_ART_I;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,11 @@ import java.util.Random;
  */
 public class Network {
     private List<Neuron> neurons;
-    private List<Float> inputs;
+    private List<Double> inputs;
 
     private float learningRate;
 
-    public Network(int numberOfNeurons, float learningRate){
+    /*public Network(int numberOfNeurons, float learningRate){
         inputs = new ArrayList<>();
         neurons = new ArrayList<>();
         for(int i=0;i<numberOfNeurons;i++){
@@ -54,5 +54,5 @@ public class Network {
         neurons.stream().max( (x,y) -> (int)((y.getOutput() - x.getOutput())*10) ).get().adaptWeights( learningRate );
         else
         System.out.println(neurons.stream().max( (x,y) -> (int)((y.getOutput() - x.getOutput())*10) ).get().id);
-    }
+    }*/
 }
