@@ -3,56 +3,55 @@ package Neural_ART_I;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Jakub on 2017-03-15.
  */
 public class Network {
     private List<Neuron> neurons;
-    private List<Double> inputs;
+    private double sensitivity;
 
-    private float learningRate;
-
-    /*public Network(int numberOfNeurons, float learningRate){
-        inputs = new ArrayList<>();
+    public Network(int numberOfNeurons, double sensitivity, int numberOfConnections){
         neurons = new ArrayList<>();
         for(int i=0;i<numberOfNeurons;i++){
-            neurons.add( new Neuron(i) );
+            neurons.add( new Neuron(i, numberOfConnections) );
         }
 
-        this.learningRate = learningRate;
+        this.sensitivity = sensitivity;
     }
 
-    public void prepareNetwork(int numberOfInputs){
-        for(int i=0; i<numberOfInputs;i++){
-            inputs.add( (float)i+1 );
-        }
-        for(Neuron neuron : neurons ){
-            Random r = new Random();
-            for(Float input : inputs){
-                neuron.addConnection( new NeuronConnection(0.0f, (float)r.nextDouble()) );
+    public void prepareNetwork(){
+        
+    }
+
+    public void sendInputs(Boolean[][] inputs){
+        //Boolean[][] inputs = null;//load from image!!!
+        neurons.forEach( (Neuron x)->(x.setInputs(inputs)) );
+    }
+
+    public List<Neuron> getNeurons() {
+        return neurons;
+    }
+
+    public int computeResult(){
+        List<Neuron> bestResults = neurons.stream()
+        .filter((x)->(x.isActive()))
+        .sorted((x, y)->((int)(100*(y.computeBottomToUpSimilatiry()-x.computeBottomToUpSimilatiry()))))
+        .collect(Collectors.toList());
+        for(Neuron n: bestResults){//no feedback from stream so this is neccessary.
+            System.out.println("Winner: "+n.getId());
+            if( n.computeUpToBottomSimilatiry() > sensitivity ){
+                System.out.println("Passed");
+                n.adaptWeights();
+                return n.getId();
             }
         }
+        Neuron n = neurons.stream().filter((x)->(!x.isActive())).findAny().get();
+        n.activate();
+        n.adaptWeights();
+        System.out.println("Activated: "+n.getId());
+        return n.getId();
     }
-
-    public void sendInputs(){
-        for(Neuron neuron : neurons ){
-            neuron.setInputs(inputs);
-        }
-    }
-
-    public void setInputs(List<Float> inputs){
-        this.inputs = inputs;
-    }
-
-    public void computeResult(boolean learning){
-        for(int i=0;i<neurons.size();i++){
-            neurons.get(i).computeOutput();
-            System.out.println("Output of neuron "+(i+1)+" is: "+neurons.get(i).getOutput());
-        }
-        if(learning)
-        neurons.stream().max( (x,y) -> (int)((y.getOutput() - x.getOutput())*10) ).get().adaptWeights( learningRate );
-        else
-        System.out.println(neurons.stream().max( (x,y) -> (int)((y.getOutput() - x.getOutput())*10) ).get().id);
-    }*/
 }
