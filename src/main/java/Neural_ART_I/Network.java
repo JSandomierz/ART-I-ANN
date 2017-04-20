@@ -11,24 +11,31 @@ import java.util.stream.Stream;
  */
 public class Network {
     private List<Neuron> neurons;
+    Boolean[][] inputs;
     private double sensitivity;
+    private int maxNeurons;
+    private int networkInputs;
 
-    public Network(int numberOfNeurons, double sensitivity, int numberOfConnections){
+    public Network(int maximumNumberOfNeurons, double sensitivity, int networkInputs){
         neurons = new ArrayList<>();
-        for(int i=0;i<numberOfNeurons;i++){
-            neurons.add( new Neuron(i, numberOfConnections) );
-        }
-
+        
+        this.maxNeurons = maximumNumberOfNeurons;
         this.sensitivity = sensitivity;
+        this.networkInputs = networkInputs;
+        
+        neurons.add(new Neuron(neurons.size(), networkInputs));
     }
 
     public void prepareNetwork(){
-        
     }
 
-    public void sendInputs(Boolean[][] inputs){
+    public void sendInputs(){
         //Boolean[][] inputs = null;//load from image!!!
         neurons.forEach( (Neuron x)->(x.setInputs(inputs)) );
+    }
+    
+    public void setInputs(Boolean[][] inputs){
+        this.inputs = inputs;
     }
 
     public List<Neuron> getNeurons() {
@@ -37,20 +44,19 @@ public class Network {
 
     public int computeResult(){
         List<Neuron> bestResults = neurons.stream()
-        .filter((x)->(x.isActive()))
         .sorted((x, y)->((int)(100*(y.computeBottomToUpSimilatiry()-x.computeBottomToUpSimilatiry()))))
         .collect(Collectors.toList());
         for(Neuron n: bestResults){//no feedback from stream so this is neccessary.
-            System.out.println("Winner: "+n.getId());
+            System.out.println("Best: "+n.getId());
             if( n.computeUpToBottomSimilatiry() > sensitivity ){
-                System.out.println("Passed");
+                System.out.println("Is winner");
                 n.adaptWeights();
                 return n.getId();
             }
         }
-        Neuron n = neurons.stream().filter((x)->(!x.isActive())).findAny().get();
-        n.activate();
+        Neuron n = new Neuron(neurons.size(), networkInputs, inputs);
         n.adaptWeights();
+        neurons.add(n);
         System.out.println("Activated: "+n.getId());
         return n.getId();
     }

@@ -8,7 +8,6 @@ import java.util.List;
  */
 public class Neuron {
     public final int id;
-    private boolean isActive;
     private List<Double> upToBottomConnections;
     private List<Double> bottomToUpConnections;
     private List<Double> inputs;
@@ -24,8 +23,10 @@ public class Neuron {
         }
     }
     
-    public void activate(){ this.isActive = true; }
-    public boolean isActive(){ return this.isActive; }
+    public Neuron(int id, int numberOfInputs, Boolean[][] inputArray){
+        this(id, numberOfInputs);
+        this.setInputs(inputArray);
+    }
 
     public void setInputs(Boolean[][] inputArray){
         inputs = new ArrayList<>();

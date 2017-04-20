@@ -102,52 +102,49 @@ public class NetworkTest {
         System.out.println("computeResult");
         Network instance = new Network(4, 0.7, 25);
         System.out.println("Passing A");
-        instance.sendInputs(inputsA);
+        instance.setInputs(inputsA);
+        instance.sendInputs();
         instance.computeResult();
         
         boolean neuronActivated = false;
         for( Neuron n: instance.getNeurons() ){
-            if( n.isActive() ){
-                neuronActivated = true;
-                Double result[] = {
-                    2.0/11.0, 1.0/26.0, 1.0/26.0, 1.0/26.0, 1.0/26.0,
-                    1.0/26.0, 2.0/11.0, 1.0/26.0, 1.0/26.0, 1.0/26.0,
-                    1.0/26.0, 1.0/26.0, 2.0/11.0, 1.0/26.0, 1.0/26.0,
-                    1.0/26.0, 1.0/26.0, 1.0/26.0, 2.0/11.0, 1.0/26.0,
-                    1.0/26.0, 1.0/26.0, 1.0/26.0, 1.0/26.0, 2.0/11.0,
-                };
-                assertArrayEquals(n.getBottomToUpConnections().toArray(), result);
-                break;
-            }
+            Double result[] = {
+                2.0/11.0, 1.0/26.0, 1.0/26.0, 1.0/26.0, 1.0/26.0,
+                1.0/26.0, 2.0/11.0, 1.0/26.0, 1.0/26.0, 1.0/26.0,
+                1.0/26.0, 1.0/26.0, 2.0/11.0, 1.0/26.0, 1.0/26.0,
+                1.0/26.0, 1.0/26.0, 1.0/26.0, 2.0/11.0, 1.0/26.0,
+                1.0/26.0, 1.0/26.0, 1.0/26.0, 1.0/26.0, 2.0/11.0,
+            };
+            assertArrayEquals(n.getBottomToUpConnections().toArray(), result);
         }
-        assertTrue(neuronActivated);
         
         System.out.println("Passing B");
-        instance.sendInputs(inputsB);
+        instance.setInputs(inputsB);
+        instance.sendInputs();
+        System.out.println("Passing B2");
         instance.computeResult();
+        System.out.println("Passing B3");
         
         int activeNeurons = 0;
         for( Neuron n: instance.getNeurons() ){
-            if( n.isActive() ){
-                activeNeurons++;
-            }
+            activeNeurons++;
         }
         assertEquals(2, activeNeurons
         );
         System.out.println("Passing C");
-        instance.sendInputs(inputsC);
+        instance.setInputs(inputsC);
+        instance.sendInputs();
         instance.computeResult();
         
         activeNeurons = 0;
         for( Neuron n: instance.getNeurons() ){
-            if( n.isActive() ){
-                activeNeurons++;
-            }
+            activeNeurons++;
         }
         assertEquals(3, activeNeurons);
         
         System.out.println("Passing D");
-        instance.sendInputs(inputsD);
+        instance.setInputs(inputsD);
+        instance.sendInputs();
         assertEquals(2, instance.computeResult());
     }
     
