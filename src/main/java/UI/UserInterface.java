@@ -6,6 +6,7 @@
 package UI;
 
 import Neural_ART_I.Network;
+import Neural_ART_I.Neuron;
 import Neural_Tools.NetworkSerializator;
 import com.sun.java.swing.plaf.windows.resources.windows;
 import java.awt.EventQueue;
@@ -325,9 +326,11 @@ public class UserInterface {
 				BinaryImage img = new BinaryImage(file);
 				network.setInputs(img.getBinaryArray());
 				network.sendInputs();
-				img.reconizedId = network.computeResult();
-                                img.similarityRatio = network.getNeurons().get(img.reconizedId).computeUpToBottomSimilatiry();
-                                network.getNeurons().get(img.reconizedId).adaptWeights();
+                                
+				Neuron bestMatch = network.computeResult();
+                                System.out.println(bestMatch.id+", "+bestMatch.similarityRatio);
+                                network.adaptWeights(bestMatch);
+                                
 				imagesList.add(img);
 				fileNames+=file.toString()+", ";
 			} catch (IOException ex) {

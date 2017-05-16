@@ -32,8 +32,6 @@ public class BinaryImage {
 	private BufferedImage colorImg;
 	private BufferedImage greyImg;
 	private Boolean[][] binaryArray;
-	public int reconizedId;
-        public double similarityRatio;
 	
 	BinaryImage(File imgFile) throws IOException{
 		if(imgFile.canRead()){

@@ -60,7 +60,7 @@ public class Network implements Serializable{
 	    initialized = false;
     }
     
-    public int computeResult() throws Exception{
+    public Neuron computeResult() throws Exception{
 	if(initialized){
 		List<Neuron> bestResults = neurons.stream()
 		.sorted((x, y)->((int)(100*(y.computeBottomToUpSimilatiry()-x.computeBottomToUpSimilatiry()))))
@@ -69,14 +69,18 @@ public class Network implements Serializable{
                     double sim = n.computeUpToBottomSimilatiry();
                     System.out.println("Neuron "+n.getId()+" is simmilar with image at: "+sim);
 		    if( sim > sensitivity ){
-			return n.getId();
+			return n;
 		    }
 		}
 		Neuron n = new Neuron(neurons.size(), networkInputs, inputs);
 		neurons.add(n);
 		System.out.println("Activated: "+n.getId());
-		return n.getId();
+		return n;
 	}
-	throw new Exception("Network was not inicialized.");
+	throw new Exception("Network was not initialized.");
+    }
+    
+    public void adaptWeights(Neuron n){
+        n.adaptWeights();
     }
 }

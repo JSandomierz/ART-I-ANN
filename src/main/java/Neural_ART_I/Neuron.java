@@ -13,6 +13,8 @@ public class Neuron implements Serializable {
     private List<Double> bottomToUpConnections;
     private List<Double> inputs;
 
+    public double similarityRatio;
+
     public Neuron(int id, int numberOfInputs){
         upToBottomConnections = new ArrayList<>();
         bottomToUpConnections = new ArrayList<>();        
@@ -54,6 +56,7 @@ public class Neuron implements Serializable {
                 result+=bottomToUpConnections.get(i);
             }
         }
+        similarityRatio = result;
         return result;
     }
 
