@@ -1,12 +1,13 @@
 package Neural_ART_I;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Jakub on 2017-03-15.
  */
-public class Neuron {
+public class Neuron implements Serializable {
     public final int id;
     private List<Double> upToBottomConnections;
     private List<Double> bottomToUpConnections;

@@ -34,7 +34,7 @@ public class NetworkTest {
     
     @Before
     public void setUp() {
-                inputsA = new Boolean[][]{
+        inputsA = new Boolean[][]{
             {true, false, false, false, false},
             {false, true, false, false, false},
             {false, false, true, false, false},
@@ -98,9 +98,10 @@ public class NetworkTest {
      * Test of computeResult method, of class Network.
      */
     @Test
-    public void testComputeResult() {
+    public void testComputeResult() throws Exception {
         System.out.println("computeResult");
-        Network instance = new Network(4, 0.7, 25);
+        Network instance = new Network();
+	instance.init(25, 0.7);
         System.out.println("Passing A");
         instance.setInputs(inputsA);
         instance.sendInputs();
