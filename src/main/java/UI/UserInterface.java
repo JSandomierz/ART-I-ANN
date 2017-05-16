@@ -8,7 +8,6 @@ package UI;
 import Neural_ART_I.Network;
 import Neural_ART_I.Neuron;
 import Neural_Tools.NetworkSerializator;
-import com.sun.java.swing.plaf.windows.resources.windows;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -22,33 +21,17 @@ import javax.swing.JFileChooser;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Component;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
-import java.awt.BorderLayout;
-
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.FileChooserUI;
-
-import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;

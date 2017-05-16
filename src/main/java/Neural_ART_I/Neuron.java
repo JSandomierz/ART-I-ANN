@@ -59,6 +59,7 @@ public class Neuron implements Serializable {
         }
         return result / inputs.stream().mapToDouble((x)->(x)).sum(); 
     }
+    
     public double computeBottomToUpSimilatiry(){
         double result=0.0;
         for( int i=0;i<inputs.size();i++ ){
@@ -70,17 +71,16 @@ public class Neuron implements Serializable {
         return result;
     }
 
-    public void adaptWeights( ){
+    public void adaptWeights(){
         double oldVSum = 0.0;
         for( int i=0;i<inputs.size();i++ ){
             if(inputs.get(i)>0.0) oldVSum+=upToBottomConnections.get(i);
         }
         for( int i=0;i<upToBottomConnections.size();i++ ){
-            upToBottomConnections.set(i, inputs.get(i) * inputs.get(i));            
+            upToBottomConnections.set(i, upToBottomConnections.get(i) * inputs.get(i));            
             if(inputs.get(i)>0.0){
                 bottomToUpConnections.set(i, (upToBottomConnections.get(i)/(0.5+oldVSum)));
             }
-            
         }
     }
 
