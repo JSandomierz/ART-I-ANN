@@ -31,7 +31,7 @@ public class ClassTableModel extends AbstractTableModel {
 	}
 
 	public Object getValueAt(int arg0, int arg1) {
-		System.out.println("getting "+arg0+"x"+arg1);
+		//System.out.println("getting "+arg0+"x"+arg1);
 		 switch(arg1){
 			 case 0:
 				 return list.get(arg0).getScaledImageIcon(40, 40);
@@ -40,7 +40,7 @@ public class ClassTableModel extends AbstractTableModel {
 				 return new String(String.valueOf(list.get(arg0).reconizedId));
 
 			 case 2:
-				 return new String("number"+arg0);
+				 return Double.toString(list.get(arg0).similarityRatio);
 		 }
 		return null;
 	}

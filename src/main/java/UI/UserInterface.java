@@ -326,6 +326,8 @@ public class UserInterface {
 				network.setInputs(img.getBinaryArray());
 				network.sendInputs();
 				img.reconizedId = network.computeResult();
+                                img.similarityRatio = network.getNeurons().get(img.reconizedId).computeUpToBottomSimilatiry();
+                                network.getNeurons().get(img.reconizedId).adaptWeights();
 				imagesList.add(img);
 				fileNames+=file.toString()+", ";
 			} catch (IOException ex) {
@@ -335,7 +337,7 @@ public class UserInterface {
 			}
 				
 		}	
-		System.out.println("ils: "+imagesList.size());
+		//System.out.println("ils: "+imagesList.size());
 		table.setModel(classTableModel);
 		table.updateUI();
 		imagesPathField.setText(fileNames);

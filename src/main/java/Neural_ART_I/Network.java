@@ -16,6 +16,8 @@ public class Network implements Serializable{
     private double sensitivity;
     private int networkInputs;
     boolean initialized = false;
+    
+    Neuron winningNeuron;
 
     public Network(){
 	neurons = new ArrayList<>();
@@ -64,15 +66,13 @@ public class Network implements Serializable{
 		.sorted((x, y)->((int)(100*(y.computeBottomToUpSimilatiry()-x.computeBottomToUpSimilatiry()))))
 		.collect(Collectors.toList());
 		for(Neuron n: bestResults){//no feedback from stream so this is neccessary.
-		    System.out.println("Best: "+n.getId());
-		    if( n.computeUpToBottomSimilatiry() > sensitivity ){
-			System.out.println("Is winner");
-			n.adaptWeights();
+                    double sim = n.computeUpToBottomSimilatiry();
+                    System.out.println("Neuron "+n.getId()+" is simmilar with image at: "+sim);
+		    if( sim > sensitivity ){
 			return n.getId();
 		    }
 		}
 		Neuron n = new Neuron(neurons.size(), networkInputs, inputs);
-		n.adaptWeights();
 		neurons.add(n);
 		System.out.println("Activated: "+n.getId());
 		return n.getId();
