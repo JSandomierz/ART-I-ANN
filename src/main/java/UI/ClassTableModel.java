@@ -37,16 +37,16 @@ public class ClassTableModel extends AbstractTableModel {
 				 return list.get(arg0).getScaledImageIcon(40, 40);
 			 case 1:
 				 //return new String("Class"+arg0);
-				 return new String(String.valueOf(list.get(arg0).reconizedId));
+				 return new String(String.valueOf(list.get(arg0).reconizedNeuron.getIdOrName()));
 
 			 case 2:
-				 return Double.toString(list.get(arg0).similarityRatio);
+				 return Double.toString(list.get(arg0).reconizedNeuron.similarityRatio);
 		 }
 		return null;
 	}
 	
 	public void setValueAt(Object value, int row, int col) {
-		
+		list.get(row).reconizedNeuron.setName((String) value);
 	}
 	
 	public Class<?> getColumnClass(int column) {

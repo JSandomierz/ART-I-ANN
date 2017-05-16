@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class Neuron implements Serializable {
     public final int id;
+    public String name=null;
     private List<Double> upToBottomConnections;
     private List<Double> bottomToUpConnections;
     private List<Double> inputs;
@@ -29,6 +30,15 @@ public class Neuron implements Serializable {
     public Neuron(int id, int numberOfInputs, Boolean[][] inputArray){
         this(id, numberOfInputs);
         this.setInputs(inputArray);
+    }
+    
+    public void setName(String name){
+	    this.name = name;
+    }
+    
+    public String getIdOrName(){
+	    if(name == null) return String.valueOf(id);
+	    return name;
     }
 
     public void setInputs(Boolean[][] inputArray){

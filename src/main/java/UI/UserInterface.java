@@ -328,6 +328,7 @@ public class UserInterface {
 				network.sendInputs();
                                 
 				Neuron bestMatch = network.computeResult();
+				img.reconizedNeuron = bestMatch;
                                 System.out.println(bestMatch.id+", "+bestMatch.similarityRatio);
                                 network.adaptWeights(bestMatch);
                                 

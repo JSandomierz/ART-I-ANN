@@ -5,6 +5,7 @@
  */
 package UI;
 
+import Neural_ART_I.Neuron;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -32,6 +33,7 @@ public class BinaryImage {
 	private BufferedImage colorImg;
 	private BufferedImage greyImg;
 	private Boolean[][] binaryArray;
+	public Neuron reconizedNeuron;
 	
 	BinaryImage(File imgFile) throws IOException{
 		if(imgFile.canRead()){
